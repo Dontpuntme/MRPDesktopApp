@@ -24,12 +24,13 @@
     <ClInclude Include="..\..\backends\imgui_impl_win32.h">
       <Filter>sources</Filter>
     </ClInclude>
+    <ClInclude Include="Src\mrpGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Src\main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\imgui_demo.cpp">
@@ -50,6 +51,7 @@
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="Src\mrpGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
