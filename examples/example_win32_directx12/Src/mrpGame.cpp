@@ -1,7 +1,7 @@
 #include "mrpGame.h"
 #include <stdlib.h>
 #include <iostream>
-
+#include <apparel.h>
 
 #define pointPrecision = 1
 #define linePrecision = 0.5
