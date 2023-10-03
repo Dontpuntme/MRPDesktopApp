@@ -17,6 +17,7 @@
 #include <dxgi1_4.h>
 #include <tchar.h>
 #include <mrpGame.h>
+#include <apparel.h>
 
 #ifdef _DEBUG
 #define DX12_ENABLE_DEBUG_LAYER
@@ -131,6 +132,7 @@ int main(int, char**)
     // Our state
     bool show_demo_window = true;
     bool show_another_window = true;
+    bool showAmourWindow = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
     int rollValue = 0;
     int endDamage = 0;
@@ -138,11 +140,12 @@ int main(int, char**)
     int power = 30;
     int accuracy = 10;
     int evade = 0;
-    int armour = 30;
     int elusiveness = 1;
     int lethality = 1;
-    int coverage = 90;
-    int yield = 90;
+    //Armour, yield, coverage, hardness, weight
+    apparel apparelOne = apparel(30, 90, 90, 0, 0);
+   
+
     // Main loop
     bool done = false;
     while (!done)
@@ -205,20 +208,44 @@ int main(int, char**)
             ImGui::SameLine(0, 10);
             if (ImGui::Button("Roll and Calc Damage!")) {
                 rollValue = mrp::roll();
-                endDamage = mrp::calcDamage(damage, power, accuracy + rollValue, evade, armour, elusiveness, lethality, rollValue, coverage, 1, yield);
+                endDamage = mrp::calcDamage(damage, power, accuracy + rollValue, evade, apparelOne.armour, elusiveness, lethality, rollValue, apparelOne.coverage, 1, apparelOne.yield);
             }
 
             ImGui::InputInt("input damage", &damage);
             ImGui::InputInt("input power", &power);
             ImGui::InputInt("input accuracy", &accuracy);
             ImGui::InputInt("input evade", &evade);
-            ImGui::InputInt("input armour", &armour);
             ImGui::InputInt("input elusiveness", &elusiveness);
             ImGui::InputInt("input lethality", &lethality);
-            ImGui::InputInt("input coverage", &coverage);
-            ImGui::InputInt("input yield", &yield);
+            ImGui::InputInt("input armour", &apparelOne.armour);
+            ImGui::InputInt("input coverage", &apparelOne.coverage);
+            ImGui::InputInt("input yield", &apparelOne.yield);
             ImGui::Text("Damage %d", endDamage);
             
+            ImGui::End();
+        }
+
+        if (showAmourWindow)
+        {
+            ImGui::Begin("Another Window", &showAmourWindow);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+            ImGui::Text("Hello from another the Armour Window!");
+
+
+            //uuse enum for CriticalHitRatio
+
+            ImGui::Text("RollValue %d", rollValue);
+            ImGui::SameLine(0, 10);
+            if (ImGui::Button("Roll and Calc Damage!")) {
+                rollValue = mrp::roll();
+                endDamage = mrp::calcDamage(damage, power, accuracy + rollValue, evade, apparelOne.armour, elusiveness, lethality, rollValue, apparelOne.coverage, 1, apparelOne.yield);
+            }
+
+            ImGui::InputInt("input armour", &apparelOne.armour);
+            ImGui::InputInt("input coverage", &apparelOne.coverage);
+            ImGui::InputInt("input yield", &apparelOne.yield);
+            ImGui::InputInt("input weight", &apparelOne.weight);
+
+
             ImGui::End();
         }
 
